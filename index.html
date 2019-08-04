@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            position: relative;
+            /* border: solid 1px black; */
+            height: 500px;
+            width: 740px;
+            margin: 100px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .light {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            border-radius: 10px;
+        }
+
+        .wrapper.animated .light {
+            transition: all 0.3s linear;
+        }
+
+        #change-button {
+            padding: 10px 20px;
+            border: none;
+            background: blue;
+            color: white;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <button id="change-button">Click!</button>
+</div>
+
+<script src="./js/light.js"></script>
+<script src="./js/garland.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>
