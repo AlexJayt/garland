@@ -1,6 +1,6 @@
 class Light {
 
-    nextDirection = 'right';
+    nextDirection = 'down';
     radius = 10;
     index = 0;
 
@@ -40,23 +40,16 @@ class Light {
         }
         const left = parseInt(this.element.style.left);
         const top = parseInt(this.element.style.top);
-        if (this.nextDirection === 'right') {
-            if (left + this.radius * 4 + this.parrent.lightDistance <= this.parrent.width) {
-                this.element.style.left = left + this.radius * 4 + 'px';
-            } else {
-                this.nextDirection = 'down';
-                return this.move(steps);
-            }
-        } else if (this.nextDirection === 'down') {
+        if (this.nextDirection === 'down') {
             if (top + this.radius * 4 + this.parrent.lightDistance <= this.parrent.height) {
                 this.element.style.top = top + this.radius * 4 + 'px';
             } else {
-                this.nextDirection = 'left';
+                this.nextDirection = 'right';
                 return this.move(steps);
             }
-        } else if (this.nextDirection === 'left') {
-            if (left - this.radius * 4 >= 0) {
-                this.element.style.left = left - this.radius * 4 + 'px';
+        } else if (this.nextDirection === 'right') {
+            if (left + this.radius * 4 + this.parrent.lightDistance <= this.parrent.width) {
+                this.element.style.left = left + this.radius * 4 + 'px';
             } else {
                 this.nextDirection = 'up';
                 return this.move(steps);
@@ -65,7 +58,14 @@ class Light {
             if (top - this.radius * 4 >= 0) {
                 this.element.style.top = top - this.radius * 4 + 'px';
             } else {
-                this.nextDirection = 'right';
+                this.nextDirection = 'left';
+                return this.move(steps);
+            }
+        } else if (this.nextDirection === 'left') {
+            if (left - this.radius * 4 >= 0) {
+                this.element.style.left = left - this.radius * 4 + 'px';
+            } else {
+                this.nextDirection = 'down';
                 return this.move(steps);
             }
         }
@@ -76,10 +76,10 @@ class Light {
     moveRound(steps = 1) {
         this.setIndex(this.index + steps);
         this.element.style.top = this.parrent.radius
-            * Math.sin(2 * Math.PI / this.parrent.lightsNumber * (this.index - this.circleOffset))
+            * Math.sin(2 * Math.PI / this.parrent.lightsNumber * (-this.index - this.circleOffset))
             + this.parrent.height / 2 - this.radius + 'px';
         this.element.style.left = this.parrent.radius
-            * Math.cos(2 * Math.PI / this.parrent.lightsNumber * (this.index - this.circleOffset))
+            * Math.cos(2 * Math.PI / this.parrent.lightsNumber * (-this.index - this.circleOffset))
             + this.parrent.width / 2 - this.radius + 'px';
     }
 
@@ -87,7 +87,7 @@ class Light {
         this.element.style.top = '0px';
         this.element.style.left = '0px';
         this.setIndex(0);
-        this.nextDirection = 'right';
+        this.nextDirection = 'down';
         this.move(index);
     }
 }
